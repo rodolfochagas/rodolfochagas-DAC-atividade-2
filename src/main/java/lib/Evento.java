@@ -1,10 +1,8 @@
 package lib;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Evento implements Serializable {
@@ -16,6 +14,8 @@ public class Evento implements Serializable {
     private String sigla;
     private String areaDeConcentracao;
     private String instituicaoOrganizadora;
+    @OneToMany(mappedBy = "evento")
+    private List<Edicao> edicoes;
 
     public Long getId() {
         return id;

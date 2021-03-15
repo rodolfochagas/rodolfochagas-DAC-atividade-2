@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,8 +41,13 @@ public class CadastraEdicaoServlet extends HttpServlet {
         edicao.setCidadeSede(request.getParameter("cidadeSede"));
         edicao.setPais(request.getParameter("pais"));
 
+        long idEvento = Long.parseLong(request.getParameter("idEvento"));
 
         try{
+            EventoDAO eDao = new EventoDAO();
+            Evento evento = eDao.recupera(idEvento);
+            edicao.setEvento(evento);
+
             EdicaoDAO dao = new EdicaoDAO();
             dao.salva(edicao);
             Long id = edicao.getId();

@@ -1,9 +1,6 @@
 package lib;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,6 +16,8 @@ public class Edicao implements Serializable {
     private Date dataFinal;
     private String cidadeSede;
     private String pais;
+    @ManyToOne
+    private Evento evento;
 
     public Long getId() {
         return id;
@@ -74,5 +73,13 @@ public class Edicao implements Serializable {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 }
