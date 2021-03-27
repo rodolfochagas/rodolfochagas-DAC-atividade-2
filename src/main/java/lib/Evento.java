@@ -3,8 +3,10 @@ package lib;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 public class Evento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
