@@ -31,4 +31,14 @@ public class EventoDAO {
         em.merge(e);
         et.commit();
     }
+
+    public void deleta(Long id) {
+        em = persistencia.JPAUtil.getEM();
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        Evento e = em.find(Evento.class, id);
+        em.remove(e);
+        et.commit();
+        em.close();
+    }
 }
