@@ -1,8 +1,12 @@
 package lib;
 
+import javax.json.*;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.io.StringReader;
+import java.net.URI;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -18,6 +22,20 @@ public class Evento implements Serializable {
     private String instituicaoOrganizadora;
     @OneToMany(mappedBy = "evento")
     private List<Edicao> edicoes;
+
+    public Evento(){
+    }
+
+    public Evento(String ent) {
+        JsonReaderFactory factory = Json.createReaderFactory(null);
+        JsonReader jsonReader = factory.createReader(new StringReader(ent));
+        JsonObject json = jsonReader.readObject();
+
+        this.nome = json.getString("nome");
+        this.sigla = json.getString("sigla");
+        this.areaDeConcentracao = json.getString("area");
+        this.instituicaoOrganizadora = json.getString("instituicao");
+    }
 
     public Long getId() {
         return id;
@@ -59,4 +77,17 @@ public class Evento implements Serializable {
     public void setInstituicaoOrganizadora(String instituicaoOrganizadora) {
         this.instituicaoOrganizadora = instituicaoOrganizadora;
     }
+
+    public JsonObject toJson() {
+        JsonBuilderFactory factory = Json.createBuilderFactory(null);
+        JsonObjectBuilder builder = factory.createObjectBuilder();
+        JsonObject obj = builder.add("id", id)
+                .add("nome", nome)
+                .add("sigla", sigla)
+                .add("instituicao", instituicaoOrganizadora)
+                .add("area", areaDeConcentracao)
+                .build();
+        return obj;
+    }
+
 }
