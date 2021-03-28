@@ -12,7 +12,7 @@ public class EdicaoDAO {
         em.persist(e);
         et.commit();
     }
-    Edicao recupera(Long id) {
+    public Edicao recupera(Long id) {
         em = JPAUtil.getEM();
         EntityTransaction et = em.getTransaction();
         et.begin();
@@ -20,5 +20,23 @@ public class EdicaoDAO {
         et.commit();
         em.close();
         return e;
+    }
+
+    public void atualiza (Edicao e){
+        em = JPAUtil.getEM();
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        em.merge(e);
+        et.commit();
+    }
+
+    public  void deleta(Long id) {
+        em = JPAUtil.getEM();
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        Edicao e = em.find(Edicao.class, id);
+        em.remove(e);
+        et.commit();
+        em.close();
     }
 }
