@@ -9,12 +9,10 @@ import java.util.List;
 import javax.json.Json;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
 import javax.json.JsonReaderFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -145,9 +143,52 @@ public class EdicaoService {
         return data;
     }
 
+    public Date stringToDateHyphen (String dataString) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        Date data = null;
+        try {
+            data = formato.parse(dataString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
     public Evento getEvento(String id) {
         long idEvento = Long.parseLong(id);
         EventoDAO eventoDAO = new EventoDAO();
         return eventoDAO.recupera(idEvento);
+    }
+
+    @GET
+    @Path("evento/{eventoId}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Edicao> findByEventoId(@PathParam("eventoId") Long eventoId) {
+        EdicaoDAO dao = new EdicaoDAO();
+        return dao.buscaPorEvento(eventoId);
+    }
+
+    @GET
+    @Path("data/{data}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Edicao> findByDate(@PathParam("data") String data) {
+        EdicaoDAO dao = new EdicaoDAO();
+        return dao.buscaPorData(stringToDateHyphen(data));
+    }
+
+    @GET
+    @Path("cidade/{cidade}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Edicao> findByCity(@PathParam("cidade") String cidade) {
+        EdicaoDAO dao = new EdicaoDAO();
+        return dao.buscaPorCidade(cidade);
+    }
+
+    @GET
+    @Path("data/{data}/cidade/{cidade}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Edicao> findByDateAndCity(@PathParam("data") String data, @PathParam("cidade") String cidade) {
+        EdicaoDAO dao = new EdicaoDAO();
+        return dao.buscaPorDataECidade(stringToDateHyphen(data), cidade);
     }
 }
