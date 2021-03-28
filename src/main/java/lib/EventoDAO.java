@@ -2,6 +2,8 @@ package lib;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import java.util.List;
 
 public class EventoDAO {
     private EntityManager em;
@@ -41,4 +43,14 @@ public class EventoDAO {
         et.commit();
         em.close();
     }
+
+    public List<Evento> buscaTodos() {
+        String jpqlQuery = "SELECT e FROM Evento e";
+        em = JPAUtil.getEM();
+        Query query = em.createQuery(jpqlQuery);
+        List<Evento> e = query.getResultList();
+        em.close();
+        return e;
+    }
+
 }
