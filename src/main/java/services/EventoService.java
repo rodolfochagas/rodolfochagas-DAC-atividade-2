@@ -45,11 +45,7 @@ public class EventoService {
         JsonReaderFactory factory = Json.createReaderFactory(null);
         JsonReader jsonReader = factory.createReader(new StringReader(ent));
         JsonObject json = jsonReader.readObject();
-        Evento e = new Evento();
-        e.setNome(json.getString("nome"));
-        e.setSigla(json.getString("sigla"));
-        e.setInstituicaoOrganizadora(json.getString("instituicao"));
-        e.setAreaDeConcentracao(json.getString("area"));
+        Evento e = new Evento(ent);
         dao.salva(e);
         URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(e.getId())).build();
         Response resp = Response.created(uri).build();
@@ -70,16 +66,7 @@ public class EventoService {
     public JsonObject findJson(@PathParam("id") Long id) {
         EventoDAO dao = new EventoDAO();
         Evento e = dao.recupera(id);
-        if (e == null)
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        JsonObjectBuilder builder = factory.createObjectBuilder();
-        JsonObject obj = builder.add("id", e.getId())
-                .add("nome", e.getNome())
-                .add("sigla", e.getSigla())
-                .add("instituicao", e.getInstituicaoOrganizadora())
-                .add("area", e.getAreaDeConcentracao())
-                .build();
-        return obj;
+        return e.toJson();
     }
 
     @PUT
