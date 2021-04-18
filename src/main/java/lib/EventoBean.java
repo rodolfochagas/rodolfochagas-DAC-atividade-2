@@ -16,10 +16,9 @@ public class EventoBean {
     private String sigla;
     private String areaDeConcentracao;
     private String instituicaoOrganizadora;
-    private List<Edicao> edicoes;
     private boolean saved;
     private EventoDAO dao;
-    private EdicaoDAO edicaoDao;
+
 //    private List<Integer> index;
 //    private Map<String, String> availableItems;
 
@@ -30,7 +29,6 @@ public class EventoBean {
         instituicaoOrganizadora = "";
         saved = false;
         dao = new EventoDAO();
-        edicaoDao = new EdicaoDAO();
     }
 
     public String getNome() {
