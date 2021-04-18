@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template = "simpleTemplate.xhtml">
+    <ui:define name = "top">
+        <h1>Diário de Classe</h1>
+    </ui:define>
+    <ui:define name = "content">
+        <br />
+        <h:form>
+
+            Nome: <h:inputText value="#{eventoBean.nome}" />&nbsp; &nbsp; &nbsp;
+            Sigla: <h:inputText value="#{eventoBean.sigla}" />
+            Área De Concentração: <h:inputText value="#{eventoBean.areaDeConcentracao}" />&nbsp; &nbsp;;
+            Instituição Organizadora: <h:inputText value="#{eventoBean.instituicaoOrganizadora}" /><br /><br />
+            <h:commandButton value="Salvar" action="#{eventoBean.saveEvento()}" />
+            <br /><br />
+<!--            Projeto: <h:selectOneMenu  value="#{eventoBean.nome}">-->
+<!--            <f:selectItems value="#{alunoBean.availableItems.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />-->
+<!--        </h:selectOneMenu >-->
+            <br /><br />
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
