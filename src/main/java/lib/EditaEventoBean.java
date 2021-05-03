@@ -20,12 +20,16 @@ public class EditaEventoBean {
     private String areaDeConcentracao;
     private String instituicaoOrganizadora;
     private boolean saved;
+    private List<Edicao> edicoes;
+    private EdicaoDAO edicaoDAO;
 
     public EditaEventoBean() {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         id = params.get("id");
+
         System.out.println("Id = " + id);
         dao = new EventoDAO();
+        edicaoDAO = new EdicaoDAO();
         e = dao.recupera(Long.parseLong(id));
         nome = e.getNome();
         sigla = e.getSigla();
@@ -47,6 +51,11 @@ public class EditaEventoBean {
     public String removeEvento() {
         dao.deleta(e.getId());
         return "mostra-eventos";
+    }
+
+    public List<Edicao> getEdicoes() {
+        edicoes = edicaoDAO.buscaPorEvento(e.getId());
+        return edicoes;
     }
 
     public String getNome() {

@@ -11,20 +11,53 @@
     <ui:define name = "content">
         <br />
         <h:form>
-            Nome: <h:outputText value="#{editaEventoBean.nome}" /> &nbsp; &nbsp;  &nbsp;
+            Nome: <h:outputText value="#{editaEventoBean.nome}" /> <br /><br />
             Área de Concentração: <h:outputText value="#{editaEventoBean.areaDeConcentracao}" /><br /><br />
-            Sigla: <h:outputText value="#{editaEventoBean.sigla}" /> &nbsp; &nbsp;  &nbsp;
-<!--            Nota 1: <h:outputText value="#{editaAlunoBean.instituicaoOrganizadora}" />&nbsp; &nbsp;-->
-<!--            Nota 2: <h:outputText value="#{editaAlunoBean.nota_2}" />&nbsp; &nbsp;-->
-<!--            Nota 3: <h:outputText value="#{editaAlunoBean.nota_3}" />&nbsp; &nbsp;-->
+            Sigla: <h:outputText value="#{editaEventoBean.sigla}" /> <br /><br />
             Instituição Organizadora: <h:outputText value="#{editaEventoBean.instituicaoOrganizadora}" /><br /><br />
+            <h2>Edições</h2>
+            <h:dataTable value="#{editaEventoBean.edicoes}" var="edicao" border="3">
+                <h:column>
+                    <f:facet name="header">Ano</f:facet>
+                    #{edicao.ano}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Cidade Sede</f:facet>
+                    #{edicao.cidadeSede}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Data Inicial</f:facet>
+                    #{edicao.dataInicial}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Data Final</f:facet>
+                    #{edicao.dataFinal}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Número</f:facet>
+                    #{edicao.numero}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">País</f:facet>
+                    #{edicao.pais}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Opções</f:facet>
+                    &nbsp; <a href="mostra-edicao.xhtml?id=#{edicao.id}">Detalhes</a>
+                    &nbsp; <a href="remove-edicao.xhtml?id=#{edicao.id}">Remove</a> &nbsp;
+                </h:column>
+            </h:dataTable>
+            <br />
+
         </h:form>
         <br /><br />
         <a href="edita-evento.xhtml?id=#{editaEventoBean.id}">Editar</a>
         <br /><br />
+        <a href="nova-edicao.xhtml?id=#{editaEventoBean.id}">Adicionar edição</a>
+        <br /><br />
         <a href="remove-evento.xhtml?id=#{editaEventoBean.id}">Remover</a>
         <br /><br />
-        <a href="faces/mostra-eventos.xhtml">Mostrar lista de eventos</a>
+        <a href="mostra-eventos.xhtml">Mostrar lista de eventos</a>
     </ui:define>
 </ui:composition>
 </html>

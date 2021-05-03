@@ -191,4 +191,14 @@ public class EdicaoService {
         EdicaoDAO dao = new EdicaoDAO();
         return dao.buscaPorDataECidade(stringToDateHyphen(data), cidade);
     }
+
+    @GET
+    @Path("todas")
+    @Produces({
+           MediaType.APPLICATION_XML,
+            MediaType.APPLICATION_JSON})
+    public List<Edicao> findAll() {
+        EdicaoDAO dao = new EdicaoDAO();
+        return dao.buscaTodas();
+    }
 }

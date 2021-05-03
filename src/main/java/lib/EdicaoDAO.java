@@ -43,6 +43,15 @@ public class EdicaoDAO {
         em.close();
     }
 
+    public List<Edicao> buscaTodas() {
+        String jpqlQuery = "SELECT e FROM Edicao e ORDER BY e.evento.id";
+        em = JPAUtil.getEM();
+        Query query = em.createQuery(jpqlQuery);
+        List<Edicao> e = query.getResultList();
+        em.close();
+        return e;
+    }
+
     public List<Edicao> buscaPorEvento(Long idEvento) {
         String jpqlQuery = "SELECT e FROM Edicao e WHERE e.evento.id = :id";
         em = JPAUtil.getEM();

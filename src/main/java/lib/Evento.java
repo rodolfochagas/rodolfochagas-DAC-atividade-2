@@ -90,4 +90,7 @@ public class Evento implements Serializable {
         return obj;
     }
 
+    public List<Edicao> getEdicoes() {
+        return edicoes;
+    }
 }

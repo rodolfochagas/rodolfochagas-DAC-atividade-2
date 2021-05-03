@@ -10,15 +10,12 @@
     </ui:define>
     <ui:define name = "content">
         <br />
+        <h2>Buscar edição por data</h2>
         <h:form>
-
-            Nome: <h:inputText value="#{eventoBean.nome}" />&nbsp; &nbsp; &nbsp;
-            Sigla: <h:inputText value="#{eventoBean.sigla}" />
-            Área De Concentração: <h:inputText value="#{eventoBean.areaDeConcentracao}" />&nbsp; &nbsp;
-            Instituição Organizadora: <h:inputText value="#{eventoBean.instituicaoOrganizadora}" /><br /><br />
-            <h:commandButton value="Salvar" action="#{eventoBean.saveEvento()}" />
-            <br /><br />
+            Data: <h:inputText value="#{buscaBean.dataString}" /> &nbsp; &nbsp;  &nbsp;
+            <h:commandButton value="Buscar" action="#{buscaBean.buscar()}" />
         </h:form>
+
     </ui:define>
 </ui:composition>
 </html>

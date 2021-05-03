@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:body>
+    <ui:composition template = "simpleTemplate.xhtml">
+        <ui:define name = "top">
+            <h1>Sistema de Cadastro de Eventos Científicos</h1>
+        </ui:define>
+        <ui:define name = "content">
+            <br />
+            <h:form>
+                <ui:repeat var="lista" value="#{listaEventoEdicaoBean.lista}">
+                    <h2>#{lista.evento.nome}</h2>
+                    Área de Concentração: <h:outputText value="#{lista.evento.areaDeConcentracao}" /><br /><br />
+                    Sigla: <h:outputText value="#{lista.evento.sigla}" /> <br /><br />
+                    Instituição Organizadora: <h:outputText value="#{lista.evento.instituicaoOrganizadora}" /><br /><br />
+                    <h3>Edições</h3>
+                    <h:dataTable value="#{lista.edicoes}" var="edicao" border="3">
+                        <h:column>
+                            <f:facet name="header">Ano</f:facet>
+                            #{edicao.ano}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Cidade Sede</f:facet>
+                            #{edicao.cidadeSede}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Data Inicial</f:facet>
+                            #{edicao.dataInicial}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Data Final</f:facet>
+                            #{edicao.dataFinal}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Número</f:facet>
+                            #{edicao.numero}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">País</f:facet>
+                            #{edicao.pais}
+                        </h:column>
+                    </h:dataTable>
+                    <br />
+
+                </ui:repeat>
+            </h:form>
+
+
+
+
+            <h:form>
+
+            </h:form>
+
+
+
+
+            <br />
+            <a href="faces/novo-evento.xhtml">Inserir novo evento</a>
+            <br /><br />
+            <a href="faces/mostra-eventos.xhtml">Mostrar lista de eventos</a>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
